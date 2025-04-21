@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Diplomado Power BI Intermedio</title>
+<style>
+    :root {
+        --primary: #2563eb;
+        --primary-light: #3b82f6;
+        --primary-dark: #1d4ed8;
+        --secondary: #64748b;
+        --light-bg: #f8fafc;
+        --card-bg: #ffffff;
+        --border-color: #e2e8f0;
+        --text-main: #1e293b;
+        --text-secondary: #475569;
+        --accent: #10b981;
+        --error: #ef4444;
+    }
+    
+    body {
+        font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+        background: var(--light-bg);
+        margin: 0;
+        padding: 0;
+        color: var(--text-main);
+        line-height: 1.6;
+
+    }
+    
+    .container {
+        max-width: 1100px;
+        margin: 40px auto;
+        background: var(--card-bg);
+        padding: 50px;
+        border-radius: 16px;
+        box-shadow: 0 4px 24px rgba(0,0,0,0.08);
+    }
+    
+    .header {
+        border-bottom: 1px solid var(--border-color);
+        padding-bottom: 30px;
+        margin-bottom: 40px;
+    }
+    
+    h1 {
+        color: var(--text-main);
+        font-size: 2.4rem;
+        margin: 0 0 10px 0;
+        font-weight: 700;
+        letter-spacing: -0.5px;
+    }
+    
+    .header-meta {
+        display: flex;
+        gap: 30px;
+        color: var(--secondary);
+        font-size: 1rem;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        font-weight: 500;
+    }
+    
+    h2 {
+        color: var(--text-main);
+        font-size: 1.6rem;
+        margin: 50px 0 25px 0;
+        font-weight: 600;
+        position: relative;
+        padding-bottom: 10px;
+    }
+    
+    h2:after {
+        content: "";
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 60px;
+        height: 3px;
+        background: var(--primary);
+        border-radius: 3px;
+    }
+    
+    h3 {
+        color: var(--primary);
+        font-size: 1.25rem;
+        margin: 0 0 15px 0;
+        font-weight: 600;
+    }
+    
+    .highlight-box {
+        background: linear-gradient(135deg, rgba(37,99,235,0.05) 0%, rgba(59,130,246,0.03) 100%);
+        padding: 30px;
+        border-radius: 12px;
+        border-left: 4px solid var(--primary);
+        margin: 40px 0;
+    }
+    
+    .grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+        gap: 25px;
+        margin: 40px 0;
+    }
+    
+    .card {
+        background: var(--card-bg);
+        padding: 25px;
+        border-radius: 12px;
+        border: 1px solid var(--border-color);
+        transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+        position: relative;
+        overflow: hidden;
+    }
+    
+    .card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 20px rgba(0,0,0,0.08);
+        border-color: var(--primary-light);
+    }
+    
+    .card:before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 4px;
+        height: 0;
+        background: var(--primary);
+        transition: all 0.3s ease;
+    }
+    
+    .card:hover:before {
+        height: 100%;
+    }
+    
+    ul {
+        padding-left: 20px;
+        margin: 0;
+    }
+    
+    li {
+        margin-bottom: 10px;
+        position: relative;
+        color: var(--text-secondary);
+    }
+    
+    li:before {
+        content: "";
+        position: absolute;
+        left: -18px;
+        top: 10px;
+        width: 6px;
+        height: 6px;
+        background: var(--primary);
+        border-radius: 50%;
+    }
+    
+    .badge {
+        display: inline-block;
+        padding: 6px 12px;
+        background-color: rgba(37,99,235,0.1);
+        color: var(--primary);
+        border-radius: 6px;
+        font-size: 0.8rem;
+        font-weight: 600;
+        margin-top: 15px;
+    }
+    
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 40px 0;
+        font-size: 0.95rem;
+        box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+    }
+    
+    th, td {
+        text-align: left;
+        padding: 15px 20px;
+        border-bottom: 1px solid var(--border-color);
+    }
+    
+    th {
+        background-color: var(--light-bg);
+        color: var(--text-secondary);
+        font-weight: 600;
+        text-transform: uppercase;
+        font-size: 0.85rem;
+        letter-spacing: 0.5px;
+    }
+    
+    tr:hover td {
+        background-color: rgba(59,130,246,0.03);
+    }
+    
+    .profiles-container {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 25px;
+        margin: 40px 0;
+    }
+    
+    .profile-box {
+        padding: 25px;
+        border-radius: 12px;
+        position: relative;
+        overflow: hidden;
+    }
+    
+    .profile-box.ingreso {
+        background: linear-gradient(135deg, rgba(16,185,129,0.05) 0%, rgba(16,185,129,0.02) 100%);
+        border-left: 4px solid var(--accent);
+    }
+    
+    .profile-box.egreso {
+        background: linear-gradient(135deg, rgba(37,99,235,0.05) 0%, rgba(59,130,246,0.02) 100%);
+        border-left: 4px solid var(--primary);
+    }
+    
+    .certification-box {
+        background: linear-gradient(135deg, rgba(239,68,68,0.05) 0%, rgba(239,68,68,0.02) 100%);
+        padding: 30px;
+        border-radius: 12px;
+        border-left: 4px solid var(--error);
+        margin: 40px 0;
+    }
+    
+    .certification-box h3 {
+        color: var(--error);
+    }
+    
+    @media (max-width: 768px) {
+        .container {
+            padding: 30px;
+            margin: 20px;
+        }
+        
+        .grid {
+            grid-template-columns: 1fr;
+        }
+        
+        .profiles-container {
+            grid-template-columns: 1fr;
+        }
+    }
+</style>
+</head>
+<body>
+
+<div class="container">
+    <div class="header">
+        <h1>Diplomado en Power BI – Nivel Intermedio</h1>
+        <div class="header-meta">
+            <span>Duración: 80 horas</span>
+            <span>Nivel: Intermedio</span>
+        </div>
+    </div>
+
+    <div class="highlight-box">
+        <h3>Objetivo General</h3>
+        <p>
+Capacitar a los participantes en el uso intermedio de Power BI para transformar datos en información estratégica, a través del desarrollo de modelos de datos eficientes, la aplicación de funciones DAX avanzadas y la creación de dashboards interactivos.  
+
+</p>
+    </div>
+
+    <h2>Módulos del Diplomado</h2>
+
+    <div class="grid">
+        <div class="card">
+            <h3>Introducción Estratégica a Power BI</h3>
+            <ul>
+                <li>Arquitectura y componentes</li>
+                <li>Modos de conexión</li>
+                <li>Buenas prácticas de carga</li>
+                <li>Contexto en inteligencia de negocios</li>
+            </ul>
+            <div class="badge">6 horas</div>
+        </div>
+        
+        <div class="card">
+            <h3>Transformación de Datos</h3>
+            <ul>
+                <li>Limpieza y transformación</li>
+                <li>Columnas personalizadas</li>
+                <li>Unión y anexado</li>
+                <li>Introducción al lenguaje M</li>
+            </ul>
+            <div class="badge">12 horas</div>
+        </div>
+        
+        <div class="card">
+            <h3>Modelado de Datos</h3>
+            <ul>
+                <li>Diseño eficiente</li>
+                <li>Relaciones avanzadas</li>
+                <li>Jerarquías</li>
+                <li>Tablas de fecha</li>
+            </ul>
+            <div class="badge">10 horas</div>
+        </div>
+        
+        <div class="card">
+            <h3>Análisis con DAX</h3>
+            <ul>
+                <li>Sintaxis DAX</li>
+                <li>Medidas calculadas</li>
+                <li>Funciones avanzadas</li>
+                <li>KPIs profesionales</li>
+            </ul>
+            <div class="badge">15 horas</div>
+        </div>
+        
+        <div class="card">
+            <h3>Visualización Avanzada</h3>
+            <ul>
+                <li>Dashboards profesionales</li>
+                <li>Visualizaciones custom</li>
+                <li>Segmentaciones</li>
+                <li>Marketplace de visuales</li>
+            </ul>
+            <div class="badge">10 horas</div>
+        </div>
+        
+        <div class="card">
+            <h3>Publicación y Seguridad</h3>
+            <ul>
+                <li>Power BI Service</li>
+                <li>Control de versiones</li>
+                <li>Seguridad (RLS)</li>
+                <li>Automatización</li>
+            </ul>
+            <div class="badge">8 horas</div>
+        </div>
+        
+        <div class="card">
+            <h3>Integración Externa</h3>
+            <ul>
+                <li>Excel y SharePoint</li>
+                <li>Exportación de informes</li>
+                <li>Optimización móvil</li>
+            </ul>
+            <div class="badge">5 horas</div>
+        </div>
+        
+        <div class="card">
+            <h3>Proyecto Integrador</h3>
+            <ul>
+                <li>Caso real aplicado</li>
+                <li>Modelado completo</li>
+                <li>Presentación final</li>
+            </ul>
+            <div class="badge">14 horas</div>
+        </div>
+    </div>
+
+    <h2>Distribución de Horas</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Módulo</th>
+                <th>Título</th>
+                <th>Horas</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr><td>I</td><td>Introducción Estratégica a Power BI</td><td>6</td></tr>
+            <tr><td>II</td><td>Transformación de Datos con Power Query</td><td>12</td></tr>
+            <tr><td>III</td><td>Modelado de Datos y Relaciones</td><td>10</td></tr>
+            <tr><td>IV</td><td>Análisis de Datos con DAX Intermedio</td><td>15</td></tr>
+            <tr><td>V</td><td>Visualización Avanzada de Datos</td><td>10</td></tr>
+            <tr><td>VI</td><td>Publicación y Seguridad en Power BI Service</td><td>8</td></tr>
+            <tr><td>VII</td><td>Integración con Herramientas Externas</td><td>5</td></tr>
+            <tr><td>VIII</td><td>Desarrollo de Proyecto Integrador</td><td>14</td></tr>
+            <tr style="font-weight:600; background-color:var(--light-bg)"><td colspan="2">Total</td><td>80 horas</td></tr>
+        </tbody>
+    </table>
+
+    <h2>Perfiles</h2>
+    
+    <div class="profiles-container">
+        <div class="profile-box ingreso">
+            <h3>Perfil de Ingreso</h3>
+            <ul>
+                <li>Conocimientos básicos de Power BI</li>
+                <li>Experiencia con Excel</li>
+            </ul>
+        </div>
+        
+        <div class="profile-box egreso">
+            <h3>Perfil de Egreso</h3>
+            <ul>
+                <li>Dashboards avanzados</li>
+                <li>Dominio de DAX intermedio</li>
+                <li>Implementación de seguridad</li>
+                <li>Integración con plataformas</li>
+            </ul>
+        </div>
+    </div>
+
+
+</div>
+
+</body>
+</html>
